@@ -12,12 +12,12 @@ function getDefaultString() {
   return typeof "window" !== "undefined" ? window.navigator.userAgent : ""
 }
 
-function useUA(uastring: string) {
-  uastring = uastring ?? getDefaultString
+function useUA(uastring?: string) {
+  uastring = uastring ?? getDefaultString()
 
   return React.useMemo<IUseUAReturn | null>(() => {
     try {
-      uaParser.setUA(uastring);
+      uaParser.setUA(uastring as string);
       return {
         os: uaParser.getOS(),
         browser: uaParser.getBrowser(),
@@ -31,12 +31,12 @@ function useUA(uastring: string) {
   }, [uastring]);
 }
 
-function useDevice(uastring: string) {
-  uastring = uastring ?? getDefaultString
+function useDevice(uastring?: string) {
+  uastring = uastring ?? getDefaultString()
 
   return React.useMemo<UAParser.IResult['device'] | null>(() => {
     try {
-      uaParser.setUA(uastring);
+      uaParser.setUA(uastring as string);
       return uaParser.getDevice();
     } catch (err) {
       return null;
@@ -44,12 +44,12 @@ function useDevice(uastring: string) {
   }, [uastring]);
 }
 
-function useBrowser(uastring: string) {
-  uastring = uastring ?? getDefaultString
+function useBrowser(uastring?: string) {
+  uastring = uastring ?? getDefaultString()
 
   return React.useMemo<UAParser.IResult['browser'] | null>(() => {
     try {
-      uaParser.setUA(uastring);
+      uaParser.setUA(uastring as string);
       return uaParser.getBrowser();
     } catch (err) {
       return null;
@@ -57,12 +57,12 @@ function useBrowser(uastring: string) {
   }, [uastring]);
 }
 
-function useCPU(uastring: string) {
-  uastring = uastring ?? getDefaultString
+function useCPU(uastring?: string) {
+  uastring = uastring ?? getDefaultString()
 
   return React.useMemo<UAParser.IResult['cpu'] | null>(() => {
     try {
-      uaParser.setUA(uastring);
+      uaParser.setUA(uastring as string);
       return uaParser.getCPU();
     } catch (err) {
       return null;
@@ -70,12 +70,12 @@ function useCPU(uastring: string) {
   }, [uastring]);
 }
 
-function useEngine(uastring: string) {
-  uastring = uastring ?? getDefaultString
+function useEngine(uastring?: string) {
+  uastring = uastring ?? getDefaultString()
   
   return React.useMemo<UAParser.IResult['engine'] | null>(() => {
     try {
-      uaParser.setUA(uastring);
+      uaParser.setUA(uastring as string);
       return uaParser.getEngine();
     } catch (err) {
       return null;
