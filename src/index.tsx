@@ -8,10 +8,13 @@ type IUseUAReturn = Omit<UAParser.IResult, 'ua'>;
 
 const uaParser = new UAParser.UAParser();
 
-// Access window.navigator.userAgent only once, this prevents browser from re-rendering
-const defaultUAString = window.navigator.userAgent;
+function getDefaultString() {
+  return typeof "window" !== "undefined" ? window.navigator.userAgent : ""
+}
 
-function useUA(uastring = defaultUAString) {
+function useUA(uastring: string) {
+  uastring = uastring ?? getDefaultString
+
   return React.useMemo<IUseUAReturn | null>(() => {
     try {
       uaParser.setUA(uastring);
@@ -28,7 +31,9 @@ function useUA(uastring = defaultUAString) {
   }, [uastring]);
 }
 
-function useDevice(uastring = defaultUAString) {
+function useDevice(uastring: string) {
+  uastring = uastring ?? getDefaultString
+
   return React.useMemo<UAParser.IResult['device'] | null>(() => {
     try {
       uaParser.setUA(uastring);
@@ -39,7 +44,9 @@ function useDevice(uastring = defaultUAString) {
   }, [uastring]);
 }
 
-function useBrowser(uastring = defaultUAString) {
+function useBrowser(uastring: string) {
+  uastring = uastring ?? getDefaultString
+
   return React.useMemo<UAParser.IResult['browser'] | null>(() => {
     try {
       uaParser.setUA(uastring);
@@ -50,7 +57,9 @@ function useBrowser(uastring = defaultUAString) {
   }, [uastring]);
 }
 
-function useCPU(uastring = defaultUAString) {
+function useCPU(uastring: string) {
+  uastring = uastring ?? getDefaultString
+
   return React.useMemo<UAParser.IResult['cpu'] | null>(() => {
     try {
       uaParser.setUA(uastring);
@@ -61,7 +70,9 @@ function useCPU(uastring = defaultUAString) {
   }, [uastring]);
 }
 
-function useEngine(uastring = defaultUAString) {
+function useEngine(uastring: string) {
+  uastring = uastring ?? getDefaultString
+  
   return React.useMemo<UAParser.IResult['engine'] | null>(() => {
     try {
       uaParser.setUA(uastring);

@@ -1,38 +1,46 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/burnpiro/use-ua-parser-js/master/misc/logo.png" width="512" height="256"> 
+    <img src="https://raw.githubusercontent.com/SiMotionBG/use-ua-parser-next/master/misc/logo.png" width="512" height="256"> 
 </p>
 
 <p align="center">
 <a href="https://travis-ci.org/faisalman/ua-parser-js"><img src="https://travis-ci.org/faisalman/ua-parser-js.svg?branch=master"></a>
-<a href="https://www.npmjs.com/package/use-ua-parser-js"><img src="https://img.shields.io/npm/v/use-ua-parser-js.svg"></a>
+<a href="https://www.npmjs.com/package/use-ua-parser-next"><img src="https://img.shields.io/npm/v/use-ua-parser-next.svg"></a>
 </p>
 
 # useUA React Hook
 
-React Hook built on top of UAParser.js library to detect Browser, Engine, OS, CPU, and Device type/model from User-Agent data
+Fork of use-ua-parser-react which adds compatiblity for NextJS (and React Server Components), built on top of UAParser.js library to detect Browser, Engine, OS, CPU, and Device type/model from User-Agent data
 
+- NextJS-compatiblle version author: SiMotin BG https://simotionbg.com
 - Hook author: Kemal Erdem https://erdem.pl
 - UAParse.js author : Faisal Salman <<f@faisalman.com>>
 - Demo : https://faisalman.github.io/ua-parser-js
-- Source : https://github.com/burnpiro/use-ua-parser-js
+- Source : https://github.com/burnpiro/use-ua-parser-next
 
 # Installation
+
 ```bash
-npm i use-ua-parser-js
+npm i use-ua-parser-next
+```
+
+```bash
+yarn add use-ua-parser-next
 ```
 
 # Usage
 
 ```javascript
-import { useUA } from 'use-ua-parser-js';
+"use client" // Can't use hooks in server components
+import { useUA } from 'use-ua-parser-next';
 
-const myComponent: FC<Props> = (props) => {
-  const UADetails = useUA(); //get current browser data
+const MyComponent: FC<Props> = (props) => {
+  const UADetails = useUA(); // Get current browser data
   [...]
 }
 ```
 
 Return:
+
 ```typescript
 {
   ua: string,
@@ -49,11 +57,11 @@ Return:
 Parse custom userAgent:
 
 ```javascript
-
-import { useUA } from 'use-ua-parser-js';
+"use client"
+import { useUA } from 'use-ua-parser-next';
 
 const customAgent = 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; en) AppleWebKit/534.46.0 (KHTML, like Gecko) CriOS/19.0.1084.60 Mobile/9B206 Safari/7534.48.3';
-const myComponent: FC<Props> = (props) => {
+const MyComponent: FC<Props> = (props) => {
   const UADetails = useUA(customAgent);
   [...]
 }
@@ -64,45 +72,45 @@ const myComponent: FC<Props> = (props) => {
 ### `useDevice(uaString?: string)`:
 
 ```javascript
+'use client';
+import { useDevice } from 'use-ua-parser-next';
 
-import { useDevice } from 'use-ua-parser-js';
-
-const myComponent: FC<Props> = (props) => {
+const MyComponent: FC<Props> = (props) => {
   const device = useDevice(); //{ model: string, type: string, vendor: string }
-}
+};
 ```
 
 ### `useBrowser(uaString?: string)`:
 
 ```javascript
+'use client';
+import { useBrowser } from 'use-ua-parser-next';
 
-import { useBrowser } from 'use-ua-parser-js';
-
-const myComponent: FC<Props> = (props) => {
+const MyComponent: FC<Props> = (props) => {
   const browser = useBrowser(); //{ name: string, version: string }
-}
+};
 ```
 
 ### `useCPU(uaString?: string)`:
 
 ```javascript
+'use client';
+import { useCPU } from 'use-ua-parser-next';
 
-import { useCPU } from 'use-ua-parser-js';
-
-const myComponent: FC<Props> = (props) => {
+const MyComponent: FC<Props> = (props) => {
   const cpu = useCPU(); //{ architecture: string }
-}
+};
 ```
 
 ### `useEngine(uaString?: string)`:
 
 ```javascript
-
-import { useEngine } from 'use-ua-parser-js';
+'use client';
+import { useEngine } from 'use-ua-parser-next';
 
 const myComponent: FC<Props> = (props) => {
   const engine = useEngine(); //{ name: string, version: string }
-}
+};
 ```
 
 ## Helpers
@@ -110,22 +118,25 @@ const myComponent: FC<Props> = (props) => {
 ### `isMobile(device: UAParser.IResult['device']): boolean`
 
 ```javascript
-import { useDevice, isMobile } from 'use-ua-parser-js';
+'use client';
+import { useDevice, isMobile } from 'use-ua-parser-next';
 
 const myComponent: FC<Props> = (props) => {
   const device = useDevice(); //{ model: string, type: string, vendor: string }
   const isCurrentDeviceMobile = isMobile(device);
-}
+};
 ```
 
 ### `isTouchDevice(device: UAParser.IResult['device']): boolean`
+
 Check if device is either a `mobile`, `tablet` or `wearable` device. Doesn't include "2:1" laptops.
 
 ```javascript
-import { useDevice, isTouchDevice } from 'use-ua-parser-js';
+'use client';
+import { useDevice, isTouchDevice } from 'use-ua-parser-next';
 
 const myComponent: FC<Props> = (props) => {
   const device = useDevice(); //{ model: string, type: string, vendor: string }
   const hasTouchScreen = isTouchDevice(device);
-}
+};
 ```
