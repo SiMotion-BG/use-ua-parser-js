@@ -1,19 +1,21 @@
-"use client"
+'use client';
 
 import * as React from 'react';
 import * as UAParser from 'ua-parser-js';
 import { isMobile, isTouchDevice } from './helpers';
 
-type IUseUAReturn = Omit<UAParser.IResult, 'ua'>;
+export { IBrowser, ICPU, IDevice, IEngine } from 'ua-parser-js';
+
+export type IUseUAReturn = Omit<UAParser.IResult, 'ua'>;
 
 const uaParser = new UAParser.UAParser();
 
 function getDefaultString() {
-  return typeof window !== "undefined" ? window.navigator.userAgent : ""
+  return typeof window !== 'undefined' ? window.navigator.userAgent : '';
 }
 
-function useUA(uastring?: string) {
-  uastring = uastring ?? getDefaultString()
+function useUA(uastring?: string): IUseUAReturn | null {
+  uastring = uastring ?? getDefaultString();
 
   return React.useMemo<IUseUAReturn | null>(() => {
     try {
@@ -31,8 +33,8 @@ function useUA(uastring?: string) {
   }, [uastring]);
 }
 
-function useDevice(uastring?: string) {
-  uastring = uastring ?? getDefaultString()
+function useDevice(uastring?: string): UAParser.IDevice | null {
+  uastring = uastring ?? getDefaultString();
 
   return React.useMemo<UAParser.IResult['device'] | null>(() => {
     try {
@@ -44,8 +46,8 @@ function useDevice(uastring?: string) {
   }, [uastring]);
 }
 
-function useBrowser(uastring?: string) {
-  uastring = uastring ?? getDefaultString()
+function useBrowser(uastring?: string): UAParser.IBrowser | null {
+  uastring = uastring ?? getDefaultString();
 
   return React.useMemo<UAParser.IResult['browser'] | null>(() => {
     try {
@@ -57,8 +59,8 @@ function useBrowser(uastring?: string) {
   }, [uastring]);
 }
 
-function useCPU(uastring?: string) {
-  uastring = uastring ?? getDefaultString()
+function useCPU(uastring?: string): UAParser.ICPU | null {
+  uastring = uastring ?? getDefaultString();
 
   return React.useMemo<UAParser.IResult['cpu'] | null>(() => {
     try {
@@ -70,9 +72,9 @@ function useCPU(uastring?: string) {
   }, [uastring]);
 }
 
-function useEngine(uastring?: string) {
-  uastring = uastring ?? getDefaultString()
-  
+function useEngine(uastring?: string): UAParser.IEngine | null {
+  uastring = uastring ?? getDefaultString();
+
   return React.useMemo<UAParser.IResult['engine'] | null>(() => {
     try {
       uaParser.setUA(uastring as string);
